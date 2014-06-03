@@ -169,6 +169,7 @@ class CommonClient:
         else: sock=transports.TCPsocket(server,use_srv)
         connected=sock.PlugIn(self)
         if not connected:
+            self.disconnected()
             sock.PlugOut()
             return
         self._Server,self._Proxy=server,proxy
