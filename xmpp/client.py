@@ -126,7 +126,11 @@ class CommonClient:
         self.connected=''
         self.DEBUG(self.DBG,'Disconnect detected','stop')
         self.disconnect_handlers.reverse()
-        for i in self.disconnect_handlers: i()
+        for i in self.disconnect_handlers:
+            try:
+                i()
+            except IOError:
+                pass
         self.disconnect_handlers.reverse()
         if self.__dict__.has_key('TLS'): self.TLS.PlugOut()
 
